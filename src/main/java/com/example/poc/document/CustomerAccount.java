@@ -18,7 +18,7 @@ public class CustomerAccount implements Serializable{
 	//private String customerId;
 	private Long accountNumber;
 	private String accountType;
-	private String previousBalance;
+	private Long previousBalance;
 	private Long currentBalance;
 	private String transactionType;
 	public Long getAccountNumber() {
@@ -33,10 +33,10 @@ public class CustomerAccount implements Serializable{
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
-	public String getPreviousBalance() {
+	public Long getPreviousBalance() {
 		return previousBalance;
 	}
-	public void setPreviousBalance(String previousBalance) {
+	public void setPreviousBalance(Long previousBalance) {
 		this.previousBalance = previousBalance;
 	}
 	public Long getCurrentBalance() {

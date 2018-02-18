@@ -5,8 +5,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import com.example.poc.controller.IntegrationController;
-import com.example.poc.document.Book;
+import com.example.poc.controller.CustomerProfileController;
+import com.example.poc.document.CustomerProfileData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,19 +16,20 @@ import lombok.RequiredArgsConstructor;
 public class DataLoader implements ApplicationRunner {
 
 	@Autowired
-    private IntegrationController controller;
+	private CustomerProfileController customerProfileController;
 
     
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        final Long cnt = controller.count();
-        if (cnt == 0) {
-            //controller.deleteCache();
-            final Book book = new Book();
-            book.setTitle("MongoDbCookBook");
-            book.setText("MongoDB Data Book");
-            book.setAuthor("Raja");
-            controller.saveBook(book);
+        final Long count1 = customerProfileController.count();
+        if(count1 == 0) {
+        	final CustomerProfileData customerProfileData = new CustomerProfileData();
+        	customerProfileData.setCustomerId("12345678");
+        	customerProfileData.setCustomerName("Mr. XYZ");
+        	customerProfileData.setAddress("Hyderabad");
+        	customerProfileData.setMobileNo("9876543210");
+        	customerProfileData.setEmailId("xyz@mail.com");
+        	customerProfileController.saveCustomerProfileData(customerProfileData);
         }
     }
 }

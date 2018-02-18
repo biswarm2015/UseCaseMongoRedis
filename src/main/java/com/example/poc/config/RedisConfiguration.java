@@ -10,12 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RedisConfiguration extends CachingConfigurerSupport {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.springframework.cache.annotation.CachingConfigurerSupport#errorHandler()
-     */
-    /** {@inheritDoc} */
+   
     @Bean
     @Override
     public CacheErrorHandler errorHandler() {
