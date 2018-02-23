@@ -1,0 +1,8 @@
+---
+applications:
+- name: usecase-mongo-redis
+  memory: 256M
+  instances: 1
+  path: target/UseCase-Mongo-Redis-0.0.1-SNAPSHOT.jar
+  env:
+    SPRING_PROFILES_ACTIVE : cloud

@@ -58,9 +58,93 @@
     <artifactId>lombok</artifactId>
     <scope>provided</scope>
 </dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-commons -->
+<dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-spring-service-connector</artifactId>
+        </dependency>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-cloudfoundry-connector</artifactId>
+        </dependency>
 		
 	</dependencies>
-
+<!-- ====================================================================== -->
+  <!-- P R O F I L E S -->
+  <!-- ====================================================================== -->
+  <profiles>
+    <profile>
+      <id>deploy</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.cloudfoundry</groupId>
+            <artifactId>cf-maven-plugin</artifactId>
+            <version>1.0.2</version>
+            <configuration>
+              <env>
+                <!-- Sets the cloud profile when the app is deployed -->
+                <SPRING_PROFILES_ACTIVE>cloud</SPRING_PROFILES_ACTIVE>
+              </env>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>push</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>2.5</version>
+            <executions>
+              <execution>
+                <id>auto-clean</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>clean</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>run</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>2.5</version>
+            <executions>
+              <execution>
+                <id>auto-clean</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>clean</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 	<build>
 		<plugins>
 			<plugin>
